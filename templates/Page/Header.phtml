@@ -1,0 +1,59 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \Core\Input;
+use \Core\XHTML;
+use \RTK\Template;
+use \RTK\Application;
+
+/* @var $app Application */
+/* @var $this Template */
+
+?>
+<header>
+    <section class="app">
+        <h1 class="name">
+            <a href="<?= XHTML::EscapeAttr( $app->GetDefaultURI() ); ?>"
+               title="Uz sākumlapu"><?= XHTML::EscapeContent( $app->cfg->name ); ?></a>
+        </h1>
+        <p class="descr"><?= XHTML::EscapeContent( $app->cfg->slogan ); ?></p>
+    </section>
+
+    <section class="info">
+        <section class="entry disclaimer">
+            <strong class="title">Kalpojam Jums!</strong>
+            <p class="content">
+                <span>Paēdis cilvēks ir laimīgs cilvēks.</span>
+                <span>
+                    <a href="<?= XHTML::EscapeAttr( $app->GetURI( 'Rules' ) ); ?>">Noteikumi</a>,
+                    <a href="<?= XHTML::EscapeAttr( $app->GetURI( 'Shipping' ) ); ?>">Piegāde</a>,
+                    <a href="<?= XHTML::EscapeAttr( $app->GetURI( 'Quality' ) ); ?>">Kvalitāte</a>.</span>
+            </p>
+        </section>
+        <section class="entry contacts">
+            <strong class="title">Kontaktinformācija</strong>
+            <p class="content">
+                <span><?= XHTML::EscapeContent( $app->cfg->contactName ); ?></span>
+                <span>
+                    <a href="mailto:<?= XHTML::EscapeAttr( $app->cfg->contactEmail ); ?>">
+                        <?= XHTML::EscapeContent( $app->cfg->contactEmail ); ?>
+                    </a>
+                </span>
+            </p>
+        </section>
+        <section class="entry copyright">
+            <strong class="title"><?= XHTML::EscapeContent( $app->cfg->copyright ) ?></strong>
+            <p class="content">
+                <span>Visas tiesības ir aizsargātas.</span>
+                <span>Visas ilustrācijas un tirgus zīmes pieder to likumīgiem īpašniekiem.</span>
+            </p>
+        </section>
+    </section>
+
+    <?php $this->Insert( 'Title' ); ?>
+    <?php $this->Insert( 'Cart' ); ?>
+</header>

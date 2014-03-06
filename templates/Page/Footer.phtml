@@ -1,0 +1,26 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \Core\XHTML;
+use \RTK\Template;
+use \RTK\Application;
+
+/* @var $app Application */
+/* @var $this Template */
+
+?>
+<footer>
+    <section class="about">
+        <strong>Kursa darbs tīmekļa tehnoloģijās.</strong>
+        <p>XHTML5 / CSS3 / JavaScript / PHP 5.5</p>
+
+        <?php if( array_key_exists( 'HTTP_USER_AGENT', $_SERVER ) ): ?>
+        <p><br /></p>
+        <p><?= XHTML::EscapeContent( $_SERVER[ 'HTTP_USER_AGENT' ] ); ?></p>
+        <?php endif; ?>
+    </section>
+</footer>

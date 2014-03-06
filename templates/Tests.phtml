@@ -1,0 +1,215 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \Exception;
+use \Core\Core;
+use \Core\Tests\Observer as TestsObserver;
+
+use \RTK\Template;
+use \RTK\Application;
+use \RTK\Response;
+
+/* @var $app Application */
+/* @var $this Template */
+
+if( !Core::$debug )
+{
+    $resp = new Response;
+    $resp->SetStatus_Forbidden();
+    $resp->Send();
+    exit;
+}
+
+/**
+ * Tracks tests being executed, reports progress.
+ */
+class Observer extends TestsObserver
+{
+    // Current indentation level (nesting of
+    // test suites)
+    public $indent = 0;
+
+    public function GetIndent()
+    {
+        return str_repeat( '    ', $this->indent );
+    }
+
+    /**
+     * @see TestsObserver::OnStart()
+     */
+    public function OnStart( $suite )
+    {
+        parent::OnStart( $suite );
+        ++$this->indent;
+
+        echo "\n";
+        echo $this->GetIndent() . '# Suite ' . get_class( $this->suite ) . "\n";
+    }
+
+    /**
+     * @see TestsObserver::OnTestStart()
+     */
+    public function OnTestStart( $testName, $fixtureKey = null )
+    {
+        parent::OnTestStart( $testName, $fixtureKey );
+        ++$this->indent;
+
+        echo "\n";
+        echo $this->GetIndent() . $testName;
+
+        if( $fixtureKey !== null )
+        {
+            echo ' (fixture = ' . $this->GetFixtureName( $fixtureKey ) .')';
+        }
+
+        echo '... ' . "\n";
+    }
+
+    /**
+     * @see TestsObserver::OnTestPass()
+     */
+    public function OnTestPass()
+    {
+        parent::OnTestPass();
+
+        echo $this->GetIndent() . '> PASS' . "\n";
+    }
+
+    /**
+     * @see TestsObserver::OnTestFail()
+     */
+    public function OnTestFail( $exception )
+    {
+        echo $this->GetIndent() . '! FAIL' . "\n";
+
+        throw $exception;
+    }
+
+    /**
+     * @see TestsObserver::OnTestSkip()
+     */
+    public function OnTestSkip()
+    {
+        parent::OnTestSkip();
+
+        echo $this->GetIndent() . '* SKIP' . "\n";
+    }
+
+    /**
+     * @see TestsObserver::OnTestEnd()
+     */
+    public function OnTestEnd()
+    {
+        parent::OnTestEnd();
+        --$this->indent;
+    }
+
+    /**
+     * @see TestsObserver::OnEnd()
+     */
+    public function OnEnd()
+    {
+        parent::OnEnd();
+        --$this->indent;
+
+        echo "\n";
+    }
+
+    /**
+     * Returns name of fixture as a single string.
+     * If fixture's name consists of several parts (i.e. is an array), then the fixture is considered
+     * to be nested. In this case, the returned string will represent a nested fixture name.
+     *
+     * @param mixed $name
+     *     If an array, then array entries are concatenated to form a nested fixture name.
+     *     If string, returned as is. If is real or int, returned as is.
+     *     Otherwise, throws an exception.
+     *
+     * @return
+     *     Fixture name.
+     */
+    protected final static function GetFixtureName( $name )
+    {
+        if( is_string( $name ) )
+        {
+            return $name;
+        }
+        else if( is_int( $name ) )
+        {
+            return $name;
+        }
+        else if( is_real( $name ) )
+        {
+            return $name;
+        }
+        else if( is_array( $name ) )
+        {
+            $parts = array();
+
+            foreach( $name as $part )
+            {
+                $parts[] = static::GetFixtureName( $part );
+            }
+
+            return implode( ' @ ', $parts );
+        }
+        else
+        {
+            Core::Fail( 'Unsupported fixture name ' . gettype( $name ) );
+        }
+    }
+}
+
+$observer = new Observer;
+
+try
+{
+    // Test suites to execute
+    $observer->Execute( array(
+        \Core\TestsTests::class,
+        \Core\CoreTests::class,
+        \Core\StringTests::class,
+        \Core\InputTests::class,
+        \Core\Input\NumberTests::class,
+        \Core\Input\IntegerTests::class,
+        \Core\Input\RealTests::class,
+        \Core\Input\TextTests::class,
+        \Core\Input\StringTests::class,
+        \Core\FilesTests::class,
+        \Core\XMLTests::class,
+        \Core\XML\ReaderTests::class,
+        \Core\XHTMLTests::class,
+        \Core\HTTP\HeaderTests::class,
+        \App\TemplateTests::class,
+        \App\Template\FileTests::class,
+        \App\ApplicationTests::class,
+        \Web\ApplicationTests::class
+    ));
+
+    echo 'All ' . $observer->tests . ' tests from ' . $observer->suites . ' suites have passed ' .
+         '(' . $observer->assertions . ' assertions)' .
+         ' in ' . Core::GetRequestDuration() . 'ms';
+}
+catch( Exception $e )
+{
+    echo 'One of the tests has failed' ."\n\n";
+
+    do
+    {
+        echo $e->getMessage() . "\n";
+        echo 'Backtrace: ' . "\n";
+        echo $e->getTraceAsString() . "\n\n";
+    }
+    while( $e = $e->getPrevious() );
+}
+finally
+{
+    echo "\n\n";
+    echo 'Included files:' . "\n";
+    print_r( get_included_files() );
+}
+

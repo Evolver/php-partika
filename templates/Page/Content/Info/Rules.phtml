@@ -1,0 +1,96 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \RTK\Template;
+use \RTK\Application;
+use \Core\XHTML;
+
+/* @var $app Application */
+/* @var $this Template */
+
+$appName = XHTML::EscapeContent( $app->cfg->name );
+
+?>
+<header>
+    <h2>Saistību atruna</h2>
+</header>
+<section class="text">
+    <p>
+        LR MK noteikumi par distances līgumu 9.punkts nosaka, ka Patērētājam* ir tiesības atkāpties no līguma
+        14 kalendāro dienu laikā un atgriezt preci pārdevējam. Taču, tai pat laikā jāņēm vērā, ka LR MK 2002.gada
+        28.maija noteikumu Nr. 207 "Noteikumi par distances līgumu" 14.1 punkts nosaka: "Patērētājs, izmantojot
+        šajos noteikumos minētās atteikuma tiesības, ir atbildīgs par preces vērtības jebkāda veida samazināšanos,
+        ja prece ir izmantota tādā veidā, kas nav savienojams ar labas ticības principu, tai skaitā izmantota citā
+        nolūkā, nevis preces īpašības vai darbības noskaidrošanai".
+    </p>
+    <p>
+        Tāpēc lūdzam ņemt vērā, ka atteikuma tiesību izmantošanas termiņā patērētājam ir tiesības preci lietot
+        tiktāl, cik tas nepieciešams preces pārbaudei (tikpat lielā mērā,  cik to varētu izdarīt pirms preces
+        iegādes parastajā veikalā, piemēram, portatīvajiem datoriem iepazīties vizuāli ar datora izskatu, izmēru,
+        taču neveicot nekādas manipulācijas, tai skaitā aktivizējot uz datora preinstalētu operētājsistēmu;
+        mobilajiem telefoniem - nenoplēšot aizsargplēves, ieslēgt, neievietojot SIM karti un neveicot zvanus,
+        nesinhronizējot datus utt.). Izmantojot atteikuma tiesības, patērētājs ir atbildīgs par preces
+        lietošanu, kas pārsniedz preces pārbaudes nolūkam paredzēto,  par tādu preces lietošanu atteikuma
+        tiesību izmantošanas termiņā, kas nav savienojama ar labas ticības principu, kā arī par preces
+        vērtības, kvalitātes un drošuma samazināšanos.
+    </p>
+    <p>
+        Patērētājam ir pienākums preci atgriezt pilnā iepakojumā, nebojātu, ja precei ir aizsargplēves
+        tās nedrīkst būt noplēstas.
+    </p>
+    <p>
+        Līdz ar to, <?= $appName; ?> patur tiesības celt pret patērētāju civilprasību tiesā, lai piedzītu
+        <?= $appName; ?> nodarītos zaudējumus, tai skaitā gadījumos, ja prece netiek atgriezta tās oriģinālajā
+        iepakojumā, preces iepakojums ir būtiski bojāts, ir sabojātas preces plombas, noplēsta aizsargplēve
+        (piemēram, no mobilo telefonu displeja), ir saskatāmas nevērīgas lietošanas pēdas, piemēram., skrāpējumi
+        un tamlīdzīgi defekti. Gadījumos, kad ar preci iespējams iepazīties, tikai saplēšot vai kā citādi
+        sabojājot preces oriģinālo iepakojumu (piemēram, plēves iepakojumu veļas mazgājamajām mašīnām), iepakojuma
+        bojājums netiek ņemts par pamatu civilprasības celšanai pret Patērētāju. Šādā gadījumā, lūdzam Patērētājus
+        saglabāt iepakojumu un atgriezt to kopā ar preci, tā kā uz iepakojuma ir norādīts preces sērijas numurs.
+        Lai atteikuma tiesību izmantošana noritētu maksimāli ātri, lūdzam šāda veida precēm atvērt iepakojumu
+        pēc iespējas rūpīgāk.
+    </p>
+    <p>
+        Ja prece, ko vēlaties iegādāties, nav noliktavā, un tā ir speciāli jāpasūta, Jums būs jāveic garantijas
+        iemaksa ne mazāka kā 10 % apmērā no preces vērtības. Atlikusī summa būs jāsamaksā pie preces piegādes.
+    </p>
+    <p>
+        Pirkuma līguma kopijas interneta veikals <?= $appName; ?> neuzglabā.
+    </p>
+    <p>
+        Lai izlabotu pasūtījuma laikā ieviesušās ievadkļūdas, lūdzu, sazinieties ar mums pa telefonu (XXXXXXXX) vai
+        sūtiet e-pastu:
+        <a href="mailto:<?= XHTML::EscapeAttr( $app->cfg->contactEmail ); ?>"><!--
+         --><?= XHTML::EscapeContent( $app->cfg->contactEmail ); ?><!--
+     --></a>.
+    </p>
+    <p>
+        Interneta veikalā <?= $appName; ?> apskatāmo preču attēli var nedaudz atšķirties no piedāvātās preces. Tāpat
+        <?= $appName; ?> uzsver, ka preču aprakstiem ir informatīva nozīme. <?= $appName; ?> neuzņemas atbildību par
+        ievadkļūdām preces aprakstos.  Lai precizētu vai konkretizētu preces raksturojumu vai novērstu ar tās
+        pasūtīšanu saistītās neskaidrības, lūdzam sazināties ar <?= $appName; ?> pa epastu:
+        <a href="mailto:<?= XHTML::EscapeAttr( $app->cfg->contactEmail ); ?>"><!--
+         --><?= XHTML::EscapeContent( $app->cfg->contactEmail ); ?><!--
+     --></a>, tel. XXXXXXXX, lai izvairītos no nepatīkamiem pārpratumiem
+    </p>
+    <p>
+        * - šeit un turpmāk Patērētājs, atbilstoši "Patērētāju tiesību aizsardzības likuma" 1.panta 3.daļai ir
+        "fiziskā persona, kas izsaka vēlēšanos iegādāties, iegādājas vai varētu iegādāties vai izmantot preci
+        vai pakalpojumu nolūkam, kurš nav saistīts ar tās saimniecisko vai profesionālo darbību".
+    </p>
+</section>
+
+<header>
+    <h2>Teksta avots un būtība</h2>
+</header>
+<section class="text">
+    <p>
+        Teksts kopēts no <a href="http://www.1a.lv/disclaimer">interneta veikala 1a mājas lapas</a> un pārveidots
+        atbilstoši kursa darba vajadzībām. Atspoguļo aptuveno noteikumu tekstu, kas varētu tikt izvietots
+        strādājošā interneta veikala mājas lapā. Tikai daļēji pārtikas tirdzniecības tematam.
+    </p>
+</section>

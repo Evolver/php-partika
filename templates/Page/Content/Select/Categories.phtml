@@ -1,0 +1,29 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \Core\Input;
+use \Core\XHTML;
+use \RTK\Template;
+use \RTK\Application;
+
+/* @var $app Application */
+/* @var $this Template */
+
+?>
+<section class="categories" app:style="categories">
+    <header class="title">
+        <h2><?= XHTML::EscapeContent( $this->title ); ?></h2>
+    </header>
+    <section class="list">
+        <?php
+        foreach( $this->categories as $category )
+        {
+            $this->Insert( 'Category', $category );
+        }
+        ?>
+    </section>
+</section>

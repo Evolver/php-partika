@@ -1,0 +1,66 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \Core\Input;
+use \Core\XHTML;
+use \RTK\Template;
+use \RTK\Application;
+use \RTK\Currency;
+
+/* @var $app Application */
+/* @var $this Template */
+
+?>
+<section class="product"
+         data-id="<?= XHTML::EscapeAttr( $this->id ); ?>"
+         data-unit-type="<?= XHTML::EscapeAttr( $this->unitType ); ?>"
+         data-unit-price="<?= XHTML::EscapeAttr( $this->unitPrice ); ?>"
+         data-unit-amount="<?= XHTML::EscapeAttr( $this->unitAmount ); ?>"
+         data-unit-min="<?= XHTML::EscapeAttr( $this->minUnits ); ?>"
+         <?php if( $this->maxUnits !== null ): ?>
+         data-unit-max="<?= XHTML::EscapeAttr( $this->maxUnits ); ?>"
+         <?php endif; ?>
+         <?php if( $this->unitCount > 0 ): ?>
+         data-count="<?= XHTML::EscapeAttr( $this->unitCount ); ?>"
+         <?php endif; ?>
+>
+    <p class="summary" title="<?= XHTML::EscapeAttr( $this->name ); ?>">
+        <strong class="name"><?= XHTML::EscapeContent( $this->name ); ?></strong>,
+        <small class="price"><!--
+         --><span class="amount"><!--
+             --><span class="currency">Ls</span>
+                <span class="value"><?= XHTML::EscapeContent( Currency::Format( $this->unitPrice ) ); ?></span><!--
+         --></span> x
+            <span class="volume"><!--
+             --><span class="qty">1</span><!--
+             --><span class="suffix">?</span><!--
+         --></span>.
+        </small>
+    </p>
+    <p class="order">
+        <strong class="volume">
+            Grozā
+            <span class="current" title="Jūsu pasūtījuma apjoms">
+                <span class="qty">1</span><span class="suffix">?</span>
+            </span> /
+            <span class="max">
+                <span class="qty">1</span><span class="suffix">?</span>
+            </span>.
+        </strong>
+        <em class="total">
+            Kopā:
+            <span class="amount"><!--
+             --><span class="currency">Ls</span>
+                <span class="value">0</span><!--
+         --></span>.
+        </em>
+        <span class="tools">
+            <a class="tool inc" href="#" title="Pievienot">Pievienot</a> vai
+            <a class="tool dec" href="#" title="Samazināt">Samazināt</a>.
+        </span>
+    </p>
+</section>

@@ -1,0 +1,29 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \Core\Input;
+use \Core\XHTML;
+use \RTK\Template;
+use \RTK\Application;
+
+/* @var $app Application */
+/* @var $this Template */
+
+$classList = [ 'category' ];
+
+if( $this->selected )
+{
+    $classList[] = 'selected';
+}
+
+?>
+<section class="<?= implode( ' ', $classList ); ?>" data-id="<?= XHTML::EscapeAttr( $this->id ); ?>">
+    <header class="title" title="<?= XHTML::EscapeAttr( $this->name ); ?>">
+        <h3><?= XHTML::EscapeContent( $this->name ); ?></h3>
+    </header>
+    <?php $this->Insert( 'Products', $this->products ); ?>
+</section>

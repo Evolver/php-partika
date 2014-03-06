@@ -1,0 +1,110 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \DateInterval;
+use \Core\XHTML;
+use \Core\DateTime;
+use \RTK\Template;
+use \RTK\Application;
+
+/* @var $app Application */
+/* @var $this Template */
+
+$minShippingDate = DateTime::Now()->add( new DateInterval( 'PT2H' ) );
+$maxShippingDate = DateTime::Now()->add( new DateInterval( 'P1D' ) );
+$totalCost = $this->itemCost + $this->shippingCost;
+
+?>
+<article>
+    <header>
+        <h2>Pasūtījuma forma</h2>
+    </header>
+
+    <form action="<?= XHTML::EscapeAttr( $app->GetURI( 'Approval' ) ); ?>" method="post" autocomplete="off">
+        <ul>
+            <li class="shippingAddress">
+                <span class="label">
+                    <label for="<?= $elemId = XHTML::RandomId(); ?>">Piegādes adrese</label>:
+                </span>
+                <input id="<?= $elemId; ?>"
+                       type="text"
+                       class="value"
+                       name="shippingAddress"
+                       required="required"
+                       maxlength="100"
+                       placeholder="Ievadi piegādes adresi"
+                       data-invalid-message="Lūdzu, ievadi piegādes adresi" />
+
+                <section class="map">
+                    <div class="canvas"></div>
+                </section>
+            </li>
+            <li class="shippingTime">
+                <span class="label">
+                    <label for="<?= $elemId = XHTML::RandomId(); ?>">Piegādes laiks</label>:
+                </span>
+                <input id="<?= $elemId; ?>"
+                       type="text"
+                       class="value"
+                       name="shippingTime"
+                       required="required"
+                       placeholder="Ievadi piegādes laiku"
+                       maxlength="50"
+                       data-invalid-message="Lūdzu, ievadi vēlamo piegādes laiku" />
+            </li>
+            <li class="shippingCost">
+                <span class="label">Piegādes maksa:</span>
+                <span class="value"><!--
+                 --><span class="currency">Ls</span>
+                    <span class="value"><?= XHTML::EscapeContent( $this->shippingCost ); ?></span><!--
+             --></span>
+            </li>
+            <li class="totalCost">
+                <span class="label">Kopā:</span>
+                <span class="value" title="Galējā cena, ieskaitot visus nodokļus"><!--
+                 --><span class="currency">Ls</span>
+                    <span class="value"><?= XHTML::EscapeContent( $totalCost ); ?></span><!--
+             --></span>
+            </li>
+            <li class="contactPhone">
+                <span class="label">
+                    <label for="<?= $elemId = XHTML::RandomId(); ?>">Kontakttālrunis</label>:
+                </span>
+                <input id="<?= $elemId; ?>"
+                       type="tel"
+                       class="value"
+                       name="contactPhone"
+                       maxlength="15"
+                       required="required"
+                       placeholder="Ievadi tavu tālruņa numuru"
+                       data-invalid-message="Lūdzu, ievadi savu tālruņa numuru" />
+            </li>
+            <li class="name">
+                <span class="label">
+                    <label for="<?= $elemId = XHTML::RandomId(); ?>">Vārds, Uzvārds</label>:
+                </span>
+                <input id="<?= $elemId; ?>"
+                       name="name"
+                       class="value"
+                       type="text"
+                       maxlength="50"
+                       required="required"
+                       placeholder="Ievadi tavu vārdu un uzvārdu"
+                       data-invalid-message="Lūdzu, ievadi savu vārdu un uzvārdu" />
+            </li>
+        </ul>
+        <section class="tools" app:style="tools">
+
+            <input class="confirm"
+                   type="submit"
+                   value="Apmaksāt" />
+
+            <a class="reject" href="javascript: history.back();" title="Atpakaļ">Atpakaļ</a>
+
+        </section>
+    </form>
+</article>

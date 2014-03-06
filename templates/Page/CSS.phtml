@@ -1,0 +1,21 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \Core\Input;
+use \Core\XHTML;
+use \RTK\Template;
+use \RTK\Application;
+
+/* @var $app Application */
+/* @var $this Template */
+
+foreach( $this->stylesheets as $path )
+{
+?>
+<link rel="stylesheet" href="<?= XHTML::EscapeAttr( $path ); ?>"  />
+<?php
+}

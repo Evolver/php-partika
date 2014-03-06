@@ -1,0 +1,23 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \Core\Input;
+use \Core\XHTML;
+use \RTK\Template;
+use \RTK\Application;
+
+/* @var $app Application */
+/* @var $this Template */
+
+?>
+<span class="total">
+    Grozā uz
+    <span class="amount"><!--
+     --><span class="currency">Ls</span>
+        <span class="value"><?= XHTML::EscapeContent( $this->total ); ?></span><!--
+ --></span>.
+</span>

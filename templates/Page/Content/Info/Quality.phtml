@@ -1,0 +1,29 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \RTK\Template;
+use \RTK\Application;
+use \Core\XHTML;
+
+/* @var $app Application */
+/* @var $this Template */
+
+$appName = XHTML::EscapeAttr( $app->cfg->name );
+
+?>
+<header>
+    <h2>3 dienu derīguma termiņš</h2>
+</header>
+<section class="text">
+    <p>
+        Visai pārtikai tiek garantēts derīguma termiņš vismaz 3 dienu ilgam periodam sākot ar piegādes brīdi.
+    </p>
+    <p>
+        Ja pārtikai, kuru iegādājāties, konstatējat iztecējušu derīguma termiņu, lūdzam to kopā ar pirkumu
+        apliecinošiem dokumentiem nogādāt <?= $appName; ?> birojā turpmāko darbību noteikšanai.
+    </p>
+</section>

@@ -1,0 +1,60 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \Core\Core;
+use \Core\XHTML;
+use \Core\Input;
+use \RTK\Template;
+use \RTK\Application;
+
+/* @var $app Application */
+
+if( $this->title != '' )
+{
+    $title = ( $this->title . ' - ' . $app->cfg->name );
+}
+else
+{
+    $title = $app->cfg->name;
+}
+
+echo '<?xml version="1.0" encoding="UTF-8" ?>' . "\n";
+?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:app="<?= XHTML::EscapeAttr( $app->cfg->xmlns ); ?>"
+      lang="lv"
+      xml:lang="lv"
+      app:baseURI="<?= XHTML::EscapeAttr( $app->cfg->baseURI ); ?>">
+<head>
+    <base href="<?= XHTML::EscapeAttr( $app->cfg->baseURI ); ?>/resources/" />
+    <meta charset="UTF-8" />
+    <meta name="application-name" content="<?= XHTML::EscapeAttr( $app->cfg->name ); ?>" />
+    <meta name="description" content="<?= XHTML::EscapeAttr( $app->cfg->descr ); ?>" />
+    <meta name="author" content="<?= XHTML::EscapeAttr( $app->cfg->author ); ?>" />
+    <meta name="viewport" content="user-scalable=no" />
+
+    <title><?= XHTML::EscapeAttr( $title ); ?></title>
+
+    <?php $this->Insert( 'CSS' ); ?>
+    <?php $this->Insert( 'JavaScript' ); ?>
+</head>
+<body>
+
+    <?php $this->Insert( 'Header' ); ?>
+    <?php $this->Insert( 'Content' ); ?>
+    <?php $this->Insert( 'Footer' ); ?>
+
+    <?php
+    if( Core::$debug )
+    {
+        $this->Insert( 'DebugInfo' );
+    }
+    ?>
+
+</body>
+</html>

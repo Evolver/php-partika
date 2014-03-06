@@ -1,0 +1,19 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \Core\Input;
+use \Core\XHTML;
+use \RTK\Template;
+use \RTK\Application;
+
+/* @var $app Application */
+/* @var $this Template */
+
+?>
+<a class="action <?= XHTML::EscapeAttr( $this->class ); ?>"
+   href="<?= XHTML::EscapeAttr( $this->href ); ?>"
+   title="<?= XHTML::EscapeAttr( $this->title ); ?>"><?= XHTML::EscapeAttr( $this->label ); ?></a>.

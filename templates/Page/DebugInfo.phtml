@@ -1,0 +1,22 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \Core\Core;
+
+/* @var $this \RTK\Template */
+
+?>
+
+<!--
+
+Time since request: <?= Core::GetRequestDuration(); ?>
+
+
+Included files:
+<?php print_r( get_included_files() ); ?>
+
+-->

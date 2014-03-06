@@ -1,0 +1,22 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \RTK\Template;
+use \RTK\Application;
+
+/* @var $app Application */
+/* @var $this Template */
+
+?>
+<section class="products" app:style="products">
+    <?php
+    foreach( $this->products as $product )
+    {
+        $this->Insert( 'Product', $product );
+    }
+    ?>
+</section>

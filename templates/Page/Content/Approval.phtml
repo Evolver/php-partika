@@ -1,0 +1,47 @@
+<?php
+/**
+ * @author Dmitry Stepanov <dmitry@stepanov.lv>
+ * @copyright 2013, Dmitry Stepanov. All rights reserved.
+ * @link http://stepanov.lv
+ */
+
+use \Core\XHTML;
+use \RTK\Template;
+use \RTK\Application;
+
+/* @var $app Application */
+/* @var $this Template */
+
+?>
+<article>
+    <header>
+        <h2>Jūsu pasūtījums Nr.
+            <span class="code" title="Pasūtījuma numurs"><?= XHTML::EscapeContent( $this->order->code ); ?></span>
+            tika rezervēts.</h2>
+        <p>Tuvākajā laikā ar Jums sazināsies mūsu operators.</p>
+    </header>
+    <section class="info">
+        <header>
+            <h3>Informācija par pasūtījumu</h3>
+        </header>
+        <ul>
+            <li class="address">
+                <span class="label">Piegādes adrese:</span>
+                <strong class="value"><?= XHTML::EscapeContent( $this->order->shippingAddress ); ?></strong>
+            </li>
+            <li class="shippingTime">
+                <span class="label">Piegādes laiks:</span>
+                <strong class="value"><?= XHTML::EscapeContent( $this->order->shippingDate ); ?></strong>
+            </li>
+            <li class="contactPhone">
+                <span class="label">Kontakttālrunis:</span>
+                <strong class="value"><?= XHTML::EscapeContent( $this->order->contactPhone ); ?></strong>
+            </li>
+        </ul>
+    </section>
+    <section class="tools" app:style="tools">
+        <a href="<?= XHTML::EscapeAttr( $app->GetDefaultURI() ); ?>" class="return" title="Uz galveno lapu">
+            Turpināt iepirkties
+        </a>
+    </section>
+</article>
