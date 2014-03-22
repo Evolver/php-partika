@@ -174,7 +174,9 @@ class Review extends Request
         }
         catch( Exception $e )
         {
-            throw $e;
+            // FIXME: For the moment the exception is suppressed (message ignored,
+            // not logged), but it would be good to write it down for later reference
+            // in the future.
             return $this->Error();
         }
 
